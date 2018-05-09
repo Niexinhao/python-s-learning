@@ -1,0 +1,25 @@
+#the confusing code:
+def f():
+ 	L = [1]
+ 	while True:
+    	yield L
+	L = L.copy()
+	#if there is a annotation ,the result would have a zero in list
+	L.append(0)
+	L = [L[i-1]+L[i] for i in range(len(L))]
+n = 0
+results = []
+for t in f():
+    print(t)
+    results.append(t)
+    print(results)
+    n = n + 1
+    if n == 10:
+        break
+
+#some simple code like this
+def f():
+	List = [1]
+    while True:
+        yield List
+        List =[1] + [value + List[index - 1] for index, value in enumerate(List) if index - 1 >= 0] + [1]
